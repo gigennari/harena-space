@@ -3,7 +3,7 @@ import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'
 import axios from 'axios'
 import '../../App.css'
 
-const API_URL = `${import.meta.env.VITE_SERVER_URL}/auth/google/` // Django endpoint
+const API_URL = `${import.meta.env.VITE_SERVER_URL}/auth/google/`
 
 function GoogleAuthComponent() {
   const [user, setUser] = useState(null)
@@ -11,39 +11,28 @@ function GoogleAuthComponent() {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    // Check if user is already authenticated
-    const token = localStorage.getItem('authToken')
-    if (token) {
-      fetchUserProfile(token)
+    const token = localStorage.getItem('token')
+    const userData = localStorage.getItem('person')
+
+    if (token && userData) {
+      setUser(JSON.parse(userData))
     }
   }, [])
-
-  const fetchUserProfile = async (token) => {
-    try {
-      const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/user/`, {
-        headers: { Authorization: `Token ${token}` }
-      })
-      setUser(response.data)
-    } catch (err) {
-      console.error('Error fetching user profile:', err)
-      localStorage.removeItem('authToken')
-    }
-  }
 
   const handleGoogleSuccess = async (credentialResponse) => {
     setLoading(true)
     setError(null)
-    
+
     try {
-      // Send Google token to your Django backend
       const response = await axios.post(API_URL, {
         token: credentialResponse.credential
       })
-      
-      // Store the authentication token from your backend
-      localStorage.setItem('authToken', response.data.token)
-      
-      // Get user info
+
+      localStorage.setItem('token', response.data.token)
+      localStorage.setItem('person', JSON.stringify(response.data.user))
+
+      console.log('Login successful:', response.data)
+
       setUser(response.data.user)
     } catch (err) {
       setError('Authentication failed. Please try again.')
@@ -59,7 +48,8 @@ function GoogleAuthComponent() {
   }
 
   const handleLogout = () => {
-    localStorage.removeItem('authToken')
+    localStorage.removeItem('token')
+    localStorage.removeItem('person')
     setUser(null)
   }
 
@@ -67,7 +57,7 @@ function GoogleAuthComponent() {
     <div className="auth-container">
       {loading && <p>Loading...</p>}
       {error && <p className="error">{error}</p>}
-      
+
       {!user ? (
         <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
           <GoogleLogin
@@ -83,8 +73,9 @@ function GoogleAuthComponent() {
           <p>Email: {user.email}</p>
           {user.picture && <img src={user.picture} alt={user.name} />}
           <button onClick={handleLogout}>Logout</button>
-          <hr/>
-          <a href="/person">Go to the List of Persons</a>
+          <hr />
+          <a href="/person">Go to the List of Persons</a> <br />
+          <a href="/quests">Go to My Quests</a>
         </div>
       )}
     </div>

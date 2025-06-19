@@ -15,6 +15,11 @@ function AppPerson() {
       </div>
       <h1>Person Report</h1>
 
+      <div>
+        <Link to="/person">Go to Person Report</Link> <br />
+        <Link to="/quests">Go to My Quests</Link>
+      </div>
+
       <PersonList />
     </>
   )
