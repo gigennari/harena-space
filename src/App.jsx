@@ -2,12 +2,16 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Login from './routes/login/Login.jsx'
 import Person from './routes/person/Person.jsx'
 import Quests from './routes/quest/Quests.jsx'
-import QuestCases from './routes/quest/QuestCases.jsx' // ✅ Importa a nova página
+import QuestCases from './routes/quest/QuestCases.jsx' 
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/', 
     element: <Login />,
+  },
+  {
+    path: '/invite/:inviteToken',
+    element: <Login />, 
   },
   {
     path: '/person',
@@ -18,7 +22,7 @@ const router = createBrowserRouter([
     element: <Quests />
   },
   {
-    path: '/quest/:questId',  // ✅ Rota dinâmica para QuestCases
+    path: '/quest/:questId',  
     element: <QuestCases />
   }
 ])
