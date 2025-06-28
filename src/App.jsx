@@ -10,9 +10,13 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: '/invite/:inviteToken',
-    element: <Login />, 
+    path: '/invite/professor/:inviteToken',
+    element: <Login />,
   },
+  {
+    path: '/invite/quest/:questToken',
+    element: <QuestInviteRedirect />,
+  }
   {
     path: '/person',
     element: <Person />,

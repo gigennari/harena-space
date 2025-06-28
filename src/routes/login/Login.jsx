@@ -36,7 +36,8 @@ function GoogleAuthComponent() {
     setError(null)
 
     const tokenFromUrl = inviteToken || getInviteTokenFromPath(); 
-
+    const questToken = localStorage.getItem('quest_invite_token');
+    
     try {
       const requestData = {
         token: credentialResponse.credential
@@ -44,6 +45,10 @@ function GoogleAuthComponent() {
 
       if (tokenFromUrl) { //includes the invite token if available
         requestData.invite_token = tokenFromUrl;
+      }
+
+      if (questToken) {
+        requestData.quest_invite_token = questToken; 
       }
 
       const response = await axios.post(API_URL, requestData); // sends requestData
@@ -55,6 +60,7 @@ function GoogleAuthComponent() {
 
 
       setUser(response.data.user)
+      localStorage.removeItem('quest_invite_token')
     } catch (err) {
       setError('Authentication failed. Please try again.')
       console.error('Google auth error:', err)
