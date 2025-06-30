@@ -1,0 +1,75 @@
+
+.create-case-container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.case-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.case-form input[type="text"],
+.case-form textarea,
+.case-form select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.case-form input[type="file"] {
+  border: none;
+}
+
+.possible-answers-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.possible-answer-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.possible-answer-row input {
+  flex: 1;
+}
+
+.possible-answer-row button {
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-answer-btn {
+  background-color: #1890ff;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+.case-form button[type="submit"] {
+  background-color: #52c41a;
+  color: white;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}

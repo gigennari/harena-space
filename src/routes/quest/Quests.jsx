@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import './Quests.css'
 
-function Quests() {
+function Quests({ embedded = false }) {
   const [quests, setQuests] = useState([])
   const navigate = useNavigate()
 
@@ -28,11 +28,14 @@ function Quests() {
       console.error('Error fetching quests:', error);
       setQuests([]);
     });
-  }, []);
+  }, [])
 
   return (
     <div>
-      <h1>My Quests</h1>
+      {!embedded && (
+        <button className="back-button" onClick={() => navigate('/')}>←</button>
+      )}
+      <h1>{embedded ? 'Minhas Quests' : 'My Quests'}</h1>
       {quests.length === 0 ? (
         <p>No quests available.</p>
       ) : (

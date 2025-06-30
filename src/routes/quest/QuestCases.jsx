@@ -95,19 +95,12 @@ function QuestCases() {
         onChange={(e) => setInputAnswer(e.target.value)}
         disabled={feedback !== ''}
       />
-      {/* Botão de Submit */}
-      {feedback === '' && (
+
+      {feedback === '' ? (
         <button onClick={handleSubmit}>Submit</button>
-      )}
-
-      {/* Feedback */}
-      {feedback !== '' && (
-        <>
-          <p className={feedback.startsWith('✅') ? "correct" : "incorrect"}>
-            {feedback}
-          </p>
-
-          {/* Navegação */}
+      ) : (
+        <div>
+          <p>{feedback}</p>
           <div className="nav-buttons">
             {currentIndex > 0 && (
               <button onClick={handlePrevious}>Previous</button>
@@ -119,7 +112,7 @@ function QuestCases() {
               <button onClick={handleFinish}>Finish</button>
             )}
           </div>
-        </>
+        </div>
       )}
     </div>
   )

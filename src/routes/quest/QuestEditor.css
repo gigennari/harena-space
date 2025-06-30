@@ -1,0 +1,56 @@
+.case-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  font-family: Arial, sans-serif;
+}
+
+.case-container h2 {
+  text-align: center;
+  color: #333;
+}
+
+.case-container h3 {
+  text-align: center;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.case-container h4 {
+  margin-top: 2rem;
+  color: #444;
+}
+
+.case-tile {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 0.5rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ddd;
+}
+
+.case-tile p {
+  margin: 0;
+}
+
+.case-tile button {
+  padding: 0.3rem 0.8rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.case-tile button:hover {
+  background-color: #0056b3;
+}
+
+button {
+  margin-top: 1rem;
+}

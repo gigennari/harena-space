@@ -1,0 +1,36 @@
+.login-container {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.home-layout {
+  font-family: sans-serif;
+}
+
+header {
+  text-align: center;
+}
+
+.main-layout {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.sidebar {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sidebar button {
+  padding: 0.5rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.content-area {
+  flex: 3;
+}

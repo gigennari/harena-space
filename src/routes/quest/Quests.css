@@ -1,27 +1,31 @@
 .quest-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1.5rem;
-  padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .quest-tile {
-  background-color: #f8f9fa;
-  border: 1px solid #ddd;
-  padding: 20px;
+  border: 1px solid #ccc;
+  padding: 1rem;
   border-radius: 8px;
-  box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
-  text-align: center;
-  transition: transform 0.2s, box-shadow 0.2s;
+  width: 180px;
+  cursor: pointer;
+  background: #f9f9f9;
+  box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
 }
 
 .quest-tile:hover {
-  transform: translateY(-5px);
-  box-shadow: 4px 4px 12px rgba(0,0,0,0.2);
+  transform: scale(1.05);
 }
 
-.quest-tile h2 {
-  margin: 0;
-  font-size: 1.3rem;
+.back-button {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
   color: #333;
 }
