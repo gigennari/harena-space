@@ -7,6 +7,8 @@ function InviteProfessor() {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  // NOVO: Adicione um estado para o número de dias de expiração, com um valor padrão de 7
+  const [expiresInDays, setExpiresInDays] = useState(7); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,7 +18,8 @@ function InviteProfessor() {
     try {
       await axios.post(
         `${import.meta.env.VITE_SERVER_URL}/api/invite/professor/`,
-        { email },
+        // NOVO: Envie o número de dias no corpo da requisição
+        { email, expires_in_days: parseInt(expiresInDays, 10) },
         {
           headers: {
             Authorization: `Token ${token}`,
@@ -48,12 +51,22 @@ function InviteProfessor() {
           placeholder="e.g., professor@example.com"
           required
         />
+        {/* NOVO: Campo para selecionar o número de dias de expiração */}
+        <label htmlFor="expiresInDays">Expiration in days:</label>
+        <input
+          type="number"
+          id="expiresInDays"
+          value={expiresInDays}
+          onChange={(e) => setExpiresInDays(e.target.value)}
+          min="1" // Garante que o usuário insira um número positivo
+          required
+        />
         <button type="submit" disabled={loading}>
           {loading ? 'Sending...' : 'Send Invitation'}
         </button>
       </form>
       <button onClick={() => navigate('/')} className="back-button">
-        Back to Home
+        ← Back
       </button>
     </div>
   );

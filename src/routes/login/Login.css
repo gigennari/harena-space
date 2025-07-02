@@ -1,3 +1,5 @@
+/* Login.css */
+
 .login-container {
   text-align: center;
   margin-top: 3rem;
@@ -5,14 +7,74 @@
 
 .home-layout {
   font-family: sans-serif;
+  min-height: 100vh; /* Ensure the layout takes full height */
+  display: flex;
+  flex-direction: column; /* Changed to column to allow header at top */
 }
 
-header {
+/* Style for the main application header */
+.app-header {
   text-align: center;
+  padding: 1rem 2rem;
+  background-color: #f8f8f8; /* Light background for header */
+  border-bottom: 1px solid #eee;
+  display: flex; /* Use flexbox to align items */
+  justify-content: space-between; /* Space out title and user info */
+  align-items: center; /* Vertically align items */
+  position: relative; /* Needed for absolute positioning of user-info if desired */
 }
 
+.app-title {
+  margin: 0;
+  font-size: 2rem;
+  color: #333;
+  flex-grow: 1; /* Allow title to take available space */
+  text-align: center; /* Center the title itself */
+}
+
+.app-tagline {
+  margin: 0;
+  color: #666;
+  font-size: 0.9rem;
+  position: absolute; /* Position tagline relative to header */
+  top: 50%; /* Adjust as needed */
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center tagline */
+  white-space: nowrap; /* Prevent tagline from wrapping */
+  padding-top: 2rem; /* Give space below title */
+}
+
+
+/* Styles for user info (photo and name) */
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between image and name */
+  /* If you want it strictly top-right without flex for header, use position: absolute */
+  /* position: absolute;
+  top: 1rem;
+  right: 2rem; */
+}
+
+.user-picture {
+  width: 40px; /* Size of the profile picture */
+  height: 40px;
+  border-radius: 50%; /* Make it circular */
+  object-fit: cover; /* Ensure image covers the area */
+  border: 2px solid #2c3e50; /* Small border for emphasis */
+}
+
+.user-name {
+  font-weight: bold;
+  color: #333;
+  font-size: 1rem;
+}
+
+
+/* Existing layout styles, adjusted */
 .main-layout {
   display: flex;
+  flex: 1; /* Allow main-layout to take remaining height */
   flex-direction: row;
   gap: 2rem;
   padding: 2rem;
@@ -23,14 +85,72 @@ header {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  background-color: #f0f2f5; /* Light grey background for sidebar */
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
 .sidebar button {
   padding: 0.5rem;
   font-weight: bold;
   cursor: pointer;
+  background-color: #2c3e50; /* Blue */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.sidebar button:hover {
+  background-color: #2c3e50; /* Darker blue on hover */
 }
 
 .content-area {
   flex: 3;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* Specific styles for the login form if it exists */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+form label {
+  text-align: left;
+}
+
+form input[type="email"],
+form input[type="password"] {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box; /* Include padding in width */
+}
+
+form button {
+  padding: 0.75rem;
+  background-color: #2c3e50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #2c3e50;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
 }

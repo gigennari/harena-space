@@ -117,19 +117,29 @@ function Login() {
     );
   }
 
-  console.log("User role:", user?.role);
+  const displayName = user.name || user.email; // Fallback to email if name isn't available
+  const userPicture = user.picture || 'https://via.placeholder.com/40'; // Fallback image
+
+  
   return (
     <div className="home-layout">
-      <header>
-        <h1>Jacinto Bemelhor</h1>
-        <p>A clinical reasoning game</p>
+      <header className="app-header"> 
+        <h1 className="app-title">Jacinto Bemelhor</h1>
+        <p className="app-tagline">A clinical reasoning game</p>
+        {user && ( 
+          <div className="user-info">
+            <img src={userPicture} alt={displayName} className="user-picture" />
+            <span className="user-name">{displayName}</span>
+          </div>
+        )}
       </header>
+
 
       <div className="main-layout">
         <aside className="sidebar">
-          <p>👤 {user.email}</p>
+          
 
-          {institution?.owner === user?.id && (
+          {institution?.owner === user?.user?.id && (
             <button onClick={() => navigate("/invite/professor")}>
               Invite Professor
             </button>

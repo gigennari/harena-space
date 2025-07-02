@@ -31,7 +31,7 @@ const router = createBrowserRouter([
     element: <Quests />
   },
   {
-    path: '/quest/:questId',  
+    path: '/quests/:questId/cases/',  
     element: <QuestCases />
   },
   {
@@ -39,7 +39,7 @@ const router = createBrowserRouter([
   element: <CreateQuest />
   },
   {
-  path: '/quest/:questId/edit',
+  path: '/quests/:questId/edit',
   element: <QuestEditor />
   },
   {

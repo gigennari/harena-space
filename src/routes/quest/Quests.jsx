@@ -44,7 +44,7 @@ function Quests({ embedded = false }) {
             <div
               key={quest.id}
               className="quest-tile"
-              onClick={() => navigate(`/quest/${quest.id}`)}
+              onClick={() => navigate(`/quests/${quest.id}/cases/`)}
             >
               <h2>{quest.name}</h2>
             </div>
