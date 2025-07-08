@@ -50,17 +50,23 @@ input[type="text"]:disabled {
 button {
   margin: 0.5rem;
   padding: 10px 20px;
-  background-color: #0077cc;
+  background-color: #ccc; /* Default color for submit button when inactive */
   border: none;
   color: white;
   border-radius: 8px;
   cursor: pointer;
   font-size: 1rem;
-  transition: background-color 0.2s ease;
+  /* Removed transition and hover for general button style */
 }
 
-button:hover {
-  background-color: #005fa3;
+/* Specific style for the Submit button when active */
+button.submit-button-active {
+  background-color: #0077cc; /* Blue color when active */
+}
+
+/* Style for buttons that should always be blue */
+button.always-blue-button {
+  background-color: #0077cc;
 }
 
 button:disabled {

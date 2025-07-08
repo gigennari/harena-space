@@ -152,6 +152,7 @@ function Login() {
           )}
 
           <button onClick={() => navigate('/cases/create')}>Create a Case</button>
+          <button onClick={() => navigate('/cases/mycases')}>My Cases</button>
           <button onClick={handleLogout}>Logout</button>
         </aside>
 

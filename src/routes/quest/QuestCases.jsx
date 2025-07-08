@@ -15,6 +15,7 @@ function QuestCases() {
   const [score, setScore] = useState(0)
   const [finished, setFinished] = useState(false)
   const [userPerson, setUserPerson] = useState(null)
+  const [hasSubmitted, setHasSubmitted] = useState(false); // State to track if an answer has been submitted for the current case
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -27,17 +28,14 @@ function QuestCases() {
 
     // Fetch the quest details
     axios
-      .get(`${import.meta.env.VITE_SERVER_URL}/api/quests/${questId}/`, { // This endpoint might not exist as per urls.py
+      .get(`${import.meta.env.VITE_SERVER_URL}/api/quests/${questId}/`, {
         headers: { Authorization: `Token ${token}` },
       })
       .then((response) => {
-        // Assuming the response for the quest details includes the quest object
-        
-        setQuest(response.data); // Adjust this based on what your API actually returns for a single quest
+        setQuest(response.data);
       })
       .catch((error) => {
         console.error("Error fetching quest details:", error);
-        // Handle error, e.g., navigate to a 404 page or show an error message
       });
 
     // Fetch cases for the quest
@@ -56,6 +54,10 @@ function QuestCases() {
 
 
   const canEditQuest = quest && userPerson && (
+    ( quest.owner === userPerson.user.id) || userPerson.groups?.includes(`editors_${quest.id}`)
+  );
+
+  const canInvite = quest && userPerson && (
     ( quest.owner === userPerson.user.id) || userPerson.groups?.includes(`editors_${quest.id}`)
   );
 
@@ -79,15 +81,19 @@ function QuestCases() {
     } else {
       setFeedback(`❌ Incorrect. Correct answer: ${currentCase.answer}`)
     }
+    setHasSubmitted(true); // Mark that an answer has been submitted for this case
   }
 
   const handleNext = () => {
     setInputAnswer('')
     setFeedback('')
+    setHasSubmitted(false); // Reset for the new case
     if (currentIndex + 1 < cases.length) {
       setCurrentIndex(prev => prev + 1)
     } else {
-      setFinished(true)
+      // This else block is reached when it's the last case and "Next" would complete the quest.
+      // We explicitly call handleFinish here if it's the last case.
+      handleFinish(); // This will transition to the finished state
     }
   }
 
@@ -96,19 +102,24 @@ function QuestCases() {
       setCurrentIndex(prev => prev - 1)
       setInputAnswer('')
       setFeedback('')
+      setHasSubmitted(false); // Reset for the new case
     }
   }
 
   const handleFinish = () => {
-    setFinished(true)
+    setFinished(true);
+    // When finishing the quest, ensure the 'hasSubmitted' state is no longer relevant for a *new* case.
+    // While the component will unmount/re-render, explicitly clearing it is good practice.
+    setHasSubmitted(false);
   }
 
+  // This block is for when the quest is completely finished, a separate view
   if (finished) {
     return (
       <div className="case-container">
-        <h2>✅ Quest Completed!</h2>
+        <h2 className="finish">✅ Quest Completed!</h2>
         <p>Your score: {score} / {cases.length}</p>
-        <button onClick={() => navigate('/quests')}>Go back to Quests</button>
+        <button className="always-blue-button" onClick={() => navigate('/quests')}>Go back to Quests</button>
       </div>
     )
   }
@@ -120,56 +131,72 @@ function QuestCases() {
           {canEditQuest && (
               <button
                 onClick={() => navigate(`/quests/${questId}/edit`)}
-                
-                className="edit-quest-button"
+                className="edit-quest-button always-blue-button" // Add always-blue-button class
               >
-                  ⚙️ Edit Quest
+                ⚙️ Edit Quest
               </button>
           )}
+          {canInvite && (
+                  <button
+                    onClick={() => navigate(`/quests/${questId}/invite`)}
+                    className="edit-quest-button always-blue-button"
+                  >
+                    Invite to Quest
+                  </button>
+            )}
+            {canInvite && ( // Only show if user can manage quest
+                  <button
+                    onClick={() => navigate(`/quests/${questId}/invitations`)} 
+                    className="always-blue-button"
+                  >
+                    See Quest Invitations
+                  </button>
+            )}
       </div>
 
-      {finished ? (
-        <div className="quest-finished">
-          <h2>✅ Quest Completed!</h2>
-          <p>Your final score: {score}</p>
-          <button onClick={() => navigate('/quests')}>Back to Quests</button>
-        </div>
-      ) : (
-        <>
-            <h3>Case {currentIndex + 1}</h3>
-            <p>{currentCase.content}</p>
+      {/* This block handles the display of individual cases */}
+      <h3>Case {currentIndex + 1}</h3>
+      <p>{currentCase.content}</p>
 
-            {currentCase.image && (
-                <img src={currentCase.image} alt="Case" className="case-image" />
-            )}
+      {currentCase.image && (
+          <img src={currentCase.image} alt="Case" className="case-image" />
+      )}
 
-            <input
-                type="text"
-                placeholder="Type your answer..."
-                value={inputAnswer}
-                onChange={(e) => setInputAnswer(e.target.value)}
-                disabled={feedback !== ''}
-            />
+      <input
+          type="text"
+          placeholder="Type your answer..."
+          value={inputAnswer}
+          onChange={(e) => setInputAnswer(e.target.value)}
+          disabled={hasSubmitted} // Disable input after submission
+      />
 
-            {feedback === '' ? (
-                <button onClick={handleSubmit}>Submit</button>
-            ) : (
-                <div>
-                    <p>{feedback}</p>
-                    <div className="nav-buttons">
-                        {currentIndex > 0 && (
-                            <button onClick={handlePrevious}>Previous</button>
-                        )}
-                        {currentIndex < cases.length - 1 && (
-                            <button onClick={handleNext}>Next</button>
-                        )}
-                        {currentIndex === cases.length - 1 && (
-                            <button onClick={handleFinish}>Finish Quest</button>
-                        )}
-                    </div>
-                </div>
-            )}
-        </>
+      {/* Apply 'submit-button-active' class when inputAnswer is not empty */}
+      <button
+          onClick={handleSubmit}
+          disabled={hasSubmitted || inputAnswer.trim() === ''}
+          className={inputAnswer.trim() !== '' ? 'submit-button-active' : ''} // Add class conditionally
+      >
+        Submit
+      </button>
+
+      {/* Show feedback and navigation buttons only after submission */}
+      {feedback !== '' && (
+          <div>
+              <p className={feedback.includes('Correct') ? 'correct' : 'incorrect'}>
+                {feedback}
+              </p>
+              <div className="nav-buttons">
+                  {currentIndex > 0 && (
+                      <button onClick={handlePrevious} className="always-blue-button">Previous</button> 
+                  )}
+                  
+                  {currentIndex < cases.length - 1 ? (
+                      <button onClick={handleNext} className="always-blue-button">Next</button> 
+                  ) : (
+                      <button onClick={handleFinish} className="always-blue-button">Finish Quest</button> 
+                  )}
+              </div>
+          </div>
       )}
     </div>
   );

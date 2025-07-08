@@ -1,0 +1,232 @@
+/* General container styles */
+.my-cases-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    font-family: 'Inter', sans-serif;
+    color: #333;
+}
+
+/* Main page title */
+.my-cases-title {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Styles for case sections (Published and Draft) */
+.cases-section {
+    margin-bottom: 40px;
+    padding: 25px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+.section-title {
+    color: #34495e;
+    font-size: 2em;
+    margin-bottom: 25px;
+    border-bottom: 3px solid #3498db;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+/* Loading and error messages */
+.loading-message, .error-message, .no-cases-message, .no-editable-quests-message {
+    text-align: center;
+    font-size: 1.1em;
+    color: #7f8c8d;
+    padding: 20px;
+    background-color: #ecf0f1;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.error-message {
+    color: #e74c3c;
+    background-color: #fdeded;
+    border: 1px solid #e74c3c;
+}
+
+/* Grid for case cards */
+.cases-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+/* Styles for each case card */
+.case-card {
+    background-color: #ecf0f1;
+    border: 1px solid #dde6e9;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.case-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.case-card h3 {
+    color: #2c3e50;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    border-bottom: 1px dashed #bdc3c7;
+    padding-bottom: 5px;
+}
+
+.case-card p {
+    color: #555;
+    font-size: 0.95em;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.case-quests h4 {
+    color: #34495e;
+    font-size: 1.1em;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.case-quests ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.case-quests ul li {
+    background-color: #dbe4e7;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    font-size: 0.9em;
+    color: #444;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.case-quests ul li::before {
+    content: '📚'; /* Book icon or other */
+    font-size: 1em;
+}
+
+/* Styles for the editable quests list (checkboxes) */
+.editable-quests-list, .publish-draft-options {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #ccc;
+}
+
+.editable-quests-list h4, .publish-draft-options h4 {
+    font-size: 1.1em;
+    color: #2980b9;
+    margin-bottom: 15px;
+}
+
+.quest-checkbox-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.quest-checkbox-item input[type="checkbox"] {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #3498db; /* Checkbox color */
+}
+
+.quest-checkbox-item label {
+    font-size: 1em;
+    color: #555;
+    cursor: pointer;
+}
+
+/* Publish button for draft cases */
+.publish-button {
+    background-color: #2ecc71;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(46, 204, 113, 0.2);
+}
+
+.publish-button:hover {
+    background-color: #27ae60;
+    transform: translateY(-2px);
+}
+
+.publish-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(46, 204, 113, 0.3);
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .my-cases-container {
+        margin: 20px auto;
+        padding: 15px;
+    }
+
+    .my-cases-title {
+        font-size: 2em;
+    }
+
+    .section-title {
+        font-size: 1.8em;
+    }
+
+    .cases-grid {
+        grid-template-columns: 1fr; /* One column on smaller screens */
+    }
+
+    .case-card {
+        padding: 15px;
+    }
+
+    .case-card h3 {
+        font-size: 1.3em;
+    }
+
+    .publish-button {
+        padding: 10px 15px;
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .my-cases-container {
+        padding: 10px;
+    }
+
+    .my-cases-title {
+        font-size: 1.8em;
+    }
+
+    .section-title {
+        font-size: 1.5em;
+    }
+}

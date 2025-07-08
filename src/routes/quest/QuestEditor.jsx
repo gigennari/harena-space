@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
-import './QuestEditor.css'; // Make sure this CSS file exists or remove the import if not needed
+import './QuestCases.css';
+
 
 function QuestEditor() {
   const { questId } = useParams();
@@ -43,9 +44,9 @@ function QuestEditor() {
       const currentQuestCasesData = questCasesRes.data || []; // Get the data here
       setQuestCases(currentQuestCasesData);
 
-      // 3. Fetch all cases owned by the user (or available to add)
+      // 3. Fetch all cases owned by the user 
       const myCasesRes = await axios.get( // AWAIT this call
-        `${import.meta.env.VITE_SERVER_URL}/api/cases/my/`, // Assuming this endpoint exists
+        `${import.meta.env.VITE_SERVER_URL}/api/cases/mycases/`, 
         { headers: { Authorization: `Token ${token}` } }
       );
 
@@ -76,7 +77,7 @@ function QuestEditor() {
     }
     try {
       await axios.post(
-        `${import.meta.env.VITE_SERVER_URL}/api/quests/${questId}/cases/remove/`,
+        `${import.meta.env.VITE_SERVER_URL}/api/quests/${questId}/cases/${caseId}/remove/`,
         { case_id: caseId },
         { headers: { Authorization: `Token ${token}` } }
       );

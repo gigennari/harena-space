@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+import './QuestCases.css';
 
 export default function QuestInviteRedirect() {
   const { questToken } = useParams()
