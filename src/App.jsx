@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+
 import Login from './routes/login/Login.jsx'
 import Person from './routes/person/Person.jsx'
 import Quests from './routes/quest/Quests.jsx'
@@ -11,15 +12,18 @@ import InviteProfessor from './routes/inviteprofessor/InviteProfessor.jsx'
 import MyCases from './routes/case/MyCases.jsx'
 import InviteToQuest from './routes/quest/InviteToQuest.jsx'
 import SeeInvitations from './routes/quest/SeeInvitations.jsx'
+import Home from './routes/home/Home.jsx'
 
 const router = createBrowserRouter([
-  //Regualar login route 
+
   {
-    path: '/', 
+    path: '/auth/login/google/',
     element: <Login />,
   },
-  //Login route for professor invitation
-  // This route is used when a professor is invited to the platform
+  {
+    path: '/home',
+    element: <Home />,
+  },
   {
     path: '/invite/professor/:inviteToken',
     element: <Login />,

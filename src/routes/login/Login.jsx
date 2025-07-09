@@ -118,7 +118,7 @@ function Login() {
   }
 
   const displayName = user.name || user.email; // Fallback to email if name isn't available
-  const userPicture = user.picture || 'https://via.placeholder.com/40'; // Fallback image
+  //const userPicture = user.picture || 'https://via.placeholder.com/40'; // Fallback image
 
   
   return (
