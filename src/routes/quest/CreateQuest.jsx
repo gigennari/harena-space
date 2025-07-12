@@ -2,6 +2,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import './QuestCases.css';
+import { FaSave, FaEdit, FaTrash, FaPlus, FaTimes } from 'react-icons/fa';
 
 export default function CreateQuest() {
   const [name, setName] = useState('')
@@ -38,17 +39,17 @@ export default function CreateQuest() {
 
   return (
     <div className="create-quest">
-      <h2>Criar Nova Quest</h2>
+      <h2>Create a New Quest</h2>
       <form onSubmit={handleSubmit}>
         <label>
-          Nome da Quest:
+          Quest name:
           <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
         </label>
         <label>
           <input type="checkbox" checked={visible} onChange={(e) => setVisible(e.target.checked)} />
-          Visível para a instituição
+          Visible to all in institution
         </label>
-        <button type="submit">Criar</button>
+        <button type="submit">Submit</button>
         {error && <p style={{ color: 'red' }}>{error}</p>}
       </form>
     </div>

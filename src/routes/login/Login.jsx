@@ -75,11 +75,20 @@ function Login() {
 
       const response = await axios.post(API_URL, requestData);
 
+      
+      console.log("Google auth response:", response.data);
+      
       localStorage.setItem("token", response.data.token);
+
+
+      console.log("Token stored in localStorage:", response.data.token);
+
       if (response.data.user) {
         localStorage.setItem("person", JSON.stringify(response.data.user));
         setUser(response.data.user);
       }
+      console.log("User data:", response.data.user);
+
       if (response.data.user?.institution) {
         localStorage.setItem(
           "institution",
@@ -87,6 +96,8 @@ function Login() {
         );
         setInstitution(response.data.user.institution);
       }
+
+      console.log("Institution data:", response.data.user.institution);
 
       localStorage.removeItem("quest_invite_token");
     } catch (err) {
@@ -118,7 +129,7 @@ function Login() {
   }
 
   const displayName = user.name || user.email; // Fallback to email if name isn't available
-  //const userPicture = user.picture || 'https://via.placeholder.com/40'; // Fallback image
+  const userPicture = user.picture || 'https://via.placeholder.com/40'; // Fallback image
 
   
   return (

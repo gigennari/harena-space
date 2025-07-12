@@ -35,7 +35,7 @@ function Quests({ embedded = false }) {
       {!embedded && (
         <button className="back-button" onClick={() => navigate('/')}>←</button>
       )}
-      <h1>{embedded ? 'Minhas Quests' : 'My Quests'}</h1>
+      <h1>{embedded ? 'My Quests' : 'My Quests'}</h1>
       {quests.length === 0 ? (
         <p>No quests available.</p>
       ) : (

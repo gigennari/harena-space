@@ -131,7 +131,7 @@ function InviteToQuest() {
       <div className="case-container">
         <h2>Access Denied</h2>
         <p>{message || "You do not have permission to invite users to this quest."}</p>
-        <button onClick={() => navigate(`/quests/${questId}`)} className="always-blue-button">Back to Quest</button>
+        <button onClick={() => navigate(`/quests/${questId}/cases`)} className="always-blue-button">Back to Quest</button>
       </div>
     );
   }
@@ -254,14 +254,14 @@ function InviteToQuest() {
       {tokenGenerated && !showShareModal && ( // Only show these if token generated and modal is closed
         <div className="nav-buttons" style={{ marginTop: '2rem' }}>
           {/* Removed "Back to Quest" button */}
-          <button onClick={() => navigate('/quests')} className="always-blue-button">Go to Quests List</button>
+          <button onClick={() => navigate(`/quests`)} className="always-blue-button">Go to Quests List</button>
         </div>
       )}
 
       {/* Original navigation buttons (only shown before token is generated) */}
       {!tokenGenerated && (
         <div className="nav-buttons" style={{ marginTop: '2rem' }}>
-          <button onClick={() => navigate(`/quests/${questId}`)} className="always-blue-button">Back to Quest</button>
+          <button onClick={() => navigate(`/quests/${questId}/cases`)} className="always-blue-button">Back to Quest</button>
           <button onClick={() => navigate(`/quests/${questId}/edit`)} className="always-blue-button">Back to Edit Quest</button>
         </div>
       )}

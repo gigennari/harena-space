@@ -230,3 +230,15 @@
         font-size: 1.5em;
     }
 }
+
+.action-button {
+    background-color: white; /* Azul padrão */
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    margin: 2px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease;
+}

@@ -21,7 +21,7 @@ function QuestCases() {
     const token = localStorage.getItem('token');
     const personFromStorage = JSON.parse(localStorage.getItem('person'));
     if (!personFromStorage || !token) {
-        navigate('/login');
+        
         return;
     }
     setUserPerson(personFromStorage);

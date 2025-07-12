@@ -49,7 +49,6 @@ function CreateCase() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem('token');
-    const person = JSON.parse(localStorage.getItem('person'));
 
     // 1. Validação dos campos obrigatórios
     if (!formData.name || !formData.description || !formData.content || !formData.answer || !formData.complexity) {
@@ -57,9 +56,6 @@ function CreateCase() {
         return;
     }
 
-    // A validação do `select` é feita automaticamente pelo atributo `required`.
-    // A validação manual não é mais estritamente necessária aqui, mas pode ser útil para mensagens personalizadas.
-    
     const data = new FormData();
     Object.entries(formData).forEach(([key, val]) => {
       // Anexar apenas se o valor não for nulo para o campo de imagem
@@ -78,9 +74,7 @@ function CreateCase() {
       }
     });
 
-    if (person?.id) {
-        data.append('case_owner', person.id);
-    }
+    
 
     // 2. Ajuste na lógica para anexar o quest_id
     if (selectedQuest && selectedQuest !== 'draft') {

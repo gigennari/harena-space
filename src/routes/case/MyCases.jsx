@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './MyCases.css';
+import { FaSave, FaEdit, FaTrash, FaPlus, FaTimes } from 'react-icons/fa';
 
 // Define the base API URL from environment variables
 const API_URL = import.meta.env.VITE_SERVER_URL;
@@ -587,7 +588,7 @@ function MyCases() {
                                                         <button onClick={() => handleDeleteCase(caseItem.id)} className="action-button delete-button">
                                                             🗑️ {/* Trash icon */}
                                                         </button>
-                                                        {/* Plus button to add to quests (only if editable quests exist) */}
+                                                        {/* Plus button to add to quests (now also for published) */}
                                                         {editableQuests.length > 0 && (
                                                             <button onClick={() => handleAddQuestClick(caseItem.id)} className="action-button add-quest-button">
                                                                 ➕ {/* Plus icon */}

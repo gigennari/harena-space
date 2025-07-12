@@ -16,10 +16,11 @@ import Home from './routes/home/Home.jsx'
 
 const router = createBrowserRouter([
 
-  {
-    path: '/auth/login/google/',
+   {
+    path: '/',
     element: <Login />,
   },
+  
   {
     path: '/home',
     element: <Home />,

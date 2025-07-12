@@ -175,9 +175,7 @@ function QuestEditor() {
         </div>
       )}
 
-      <button onClick={() => navigate('/quests')} className="back-button">
-        ← Back to Quests
-      </button>
+       <button onClick={() => navigate(`/quests/${questId}/cases`)} className="always-blue-button">Back to Quest</button>
     </div>
   );
 }
